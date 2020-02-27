@@ -4,13 +4,13 @@ const presenter = require("./presenter")
 
 module.exports = {
 async makeAReservation(request, h) {
-        let response = commandHandler(
+        let events = commandHandler(
             new MakeAReservationCommand(
                 "La boutique",
                 "2020-02-27",
                 request.payload["number-of-guests"]
             )
         )
-        return presenter(response, h);
+        return presenter(events, h);
     }
 }

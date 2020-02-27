@@ -1,7 +1,4 @@
-const ReservationAcceptedEvent  = require('../domain/reservation-accepted');
-const ReservationRejectedEvent  = require('../domain/reservation-rejected');
-
-const MAX_NUMBER_OF_GUESTS = 12;
+const Restaurant = require("../domain/restaurant")
 
 module.exports = function makeAReservation(
     {
@@ -10,10 +7,7 @@ module.exports = function makeAReservation(
         numberOfGuests
     }
 ) {
-    if (numberOfGuests > MAX_NUMBER_OF_GUESTS) {
-        return new ReservationRejectedEvent(
-            restaurant, date, numberOfGuests
-        )
-    }
-    return new ReservationAcceptedEvent(restaurant, date, numberOfGuests)
+    let restaurantAggregate = new Restaurant(restaurant)
+    restaurantAggregate.makeAReservation(date, numberOfGuests)
+    return restaurantAggregate.getDomainEvents()
 };
