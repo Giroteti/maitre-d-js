@@ -1,9 +1,9 @@
 const MakeAReservationCommand = require("../command/make-a-reservation-command")
 const commandHandler = require("../command/make-a-reservation-command-handler")
-const ReservationAcceptedEvent = require("../domain/reservation-accepted")
+const presenter = require("./presenter")
 
 module.exports = {
-    async makeAReservation(request, h) {
+async makeAReservation(request, h) {
         let response = commandHandler(
             new MakeAReservationCommand(
                 "La boutique",
@@ -11,10 +11,6 @@ module.exports = {
                 request.payload["number-of-guests"]
             )
         )
-        if (response instanceof ReservationAcceptedEvent) {
-            return response
-        } else {
-            return h.response(response).code(409)
-        }
+        return presenter(response, h);
     }
 }
