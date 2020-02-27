@@ -1,23 +1,16 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const routes = require ('./routes')
 
 const server = Hapi.server({
     port: 3000,
     host: 'localhost'
 });
 
-server.route({
-    method: 'POST',
-    path: '/make-a-reservation',
-    handler: (request, h) => {
-        return "{}"
-    }
-});
-
 exports.init = async () => {
-
     await server.initialize();
+    await server.register(routes);
     return server;
 };
 
