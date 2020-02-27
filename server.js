@@ -8,9 +8,10 @@ const server = Hapi.server({
     host: 'localhost'
 });
 
+server.register(routes);
+
 exports.init = async () => {
     await server.initialize();
-    await server.register(routes);
     return server;
 };
 
