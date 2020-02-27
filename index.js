@@ -1,4 +1,4 @@
 'use strict';
 const { start } = require('./server');
-
-start();
+const { init } = require('./server')
+init().then(start);
