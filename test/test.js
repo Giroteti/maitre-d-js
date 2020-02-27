@@ -1,8 +1,25 @@
 var assert = require('assert');
-describe('Array', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when the value is not present', function() {
-            assert.equal([1, 2, 3].indexOf(4), -1);
+const { init } = require('../server');
+
+describe('Make a reservation', function() {
+    describe('routing', function() {
+
+        let server;
+
+        beforeEach(async () => {
+            server = await init();
+        });
+
+        afterEach(async () => {
+            await server.stop();
+        });
+
+        it('responds with 200', async () => {
+            const res = await server.inject({
+                method: 'POST',
+                url: '/make-a-reservation'
+            });
+            assert.equal(res.statusCode,200);
         });
     });
 });
