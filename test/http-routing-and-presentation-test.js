@@ -66,6 +66,54 @@ describe('Make a reservation', function() {
                 }
             )
         });
+
+        it('responds with reservation rejected - 409', async () => {
+            // When
+            const response = await server.inject({
+                method: 'POST',
+                url: '/make-a-reservation',
+                payload: {
+                    "restaurant":"La boutique",
+                    "date":"2020-02-28",
+                    "number-of-guests":13
+                }
+            });
+
+            // Then
+            assert.equal(response.statusCode,409);
+            assert.deepEqual(
+                JSON.parse(response.payload),
+                {
+                    "restaurant": "La boutique",
+                    "date": "2020-02-28",
+                    "numberOfGuests": 13
+                }
+            )
+        });
+
+        it('responds with error when uncaught exception - 500', async () => {
+            // When
+            const response = await server.inject({
+                method: 'POST',
+                url: '/make-a-reservation',
+                payload: {
+                    "restaurant":"500",
+                    "date":"2020-02-28",
+                    "number-of-guests":13
+                }
+            });
+
+            // Then
+            assert.equal(response.statusCode,500);
+            assert.deepEqual(
+                JSON.parse(response.payload),
+                {
+                    error: 'Internal Server Error',
+                    message: 'An internal server error occurred',
+                    statusCode: 500
+                }
+            )
+        });
     });
 });
 
@@ -79,6 +127,10 @@ class DependenciesInjectionForTest extends DependenciesInjection {
                     numberOfGuests
                 }
             ) {
+                if (restaurant == "500") {
+                    throw "whatever"
+                }
+
                 if (numberOfGuests <= 12) {
                     return [new ReservationAcceptedEvent(
                         restaurant, date, numberOfGuests
