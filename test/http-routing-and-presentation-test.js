@@ -113,6 +113,27 @@ describe('Make a reservation', function() {
                 }
             )
         });
+
+        it('responds with 400 when validation Error - 400', async () => {
+            // When
+            const response = await server.inject({
+                method: 'POST',
+                url: '/make-a-reservation',
+                payload: {
+                    "restaurant":"La boutique",
+                    "number-of-guests":12
+                }
+            });
+
+            // Then
+            assert.equal(response.statusCode,400);
+            assert.deepEqual(
+                JSON.parse(response.payload),
+                {
+                    "message":  "\"date\" is required"
+                }
+            )
+        });
     });
 });
 
