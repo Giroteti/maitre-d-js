@@ -23,5 +23,9 @@ class Restaurant {
     getDomainEvents() {
         return this.#events
     }
+
+    flushDomainEvents() {
+        this.#events = []
+    }
 }
 module.exports = Restaurant

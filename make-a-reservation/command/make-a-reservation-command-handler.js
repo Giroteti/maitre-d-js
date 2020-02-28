@@ -12,6 +12,9 @@ module.exports = class MakeAReservationCommandHandler{
     ) {
         let restaurantAggregate = this.repository.getByName(restaurant)
         restaurantAggregate.makeAReservation(date, numberOfGuests)
-        return restaurantAggregate.getDomainEvents()
+        let events = restaurantAggregate.getDomainEvents()
+        this.repository.save(events)
+        restaurantAggregate.flushDomainEvents()
+        return events
     }
 }

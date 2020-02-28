@@ -7,14 +7,18 @@ class MakeAReservationController {
         this.makeAReservation = this.makeAReservation.bind(this)
     }
     async makeAReservation(request, h) {
-        let events = this.handler.handle(
-            new MakeAReservationCommand(
-                request.payload["restaurant"],
-                request.payload["date"],
-                request.payload["number-of-guests"]
+        try {
+            let events = this.handler.handle(
+                new MakeAReservationCommand(
+                    request.payload["restaurant"],
+                    request.payload["date"],
+                    request.payload["number-of-guests"]
+                )
             )
-        )
-        return this.presenter.present(events, h);
+            return this.presenter.present(events, h);
+        } catch (e) {
+            return this.presenter.presentException(e, h);
+        }
     }
 }
 
