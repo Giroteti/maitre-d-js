@@ -1,4 +1,5 @@
 'use strict';
-const { start } = require('./server');
-const { init } = require('./server')
-init().then(start);
+const { registerRoutes, init, start } = require('./server');
+registerRoutes()
+    .then(init)
+    .then(start);

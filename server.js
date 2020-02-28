@@ -1,5 +1,5 @@
 'use strict';
-
+const DependenciesInjection = require("./make-a-reservation/infrastructure/dependencies-injection")
 const Hapi = require('@hapi/hapi');
 const routes = require ('./routes')
 
@@ -8,7 +8,18 @@ const server = Hapi.server({
     host: 'localhost'
 });
 
-server.register(routes);
+global.di = new DependenciesInjection()
+let registered = false
+
+exports.registerRoutes = async (customDi = null) => {
+    if (customDi != null) {
+        global.di = customDi
+    }
+    if (!registered) {
+        await server.register(routes);
+        registered = true
+    }
+}
 
 exports.init = async () => {
     await server.initialize();
@@ -16,7 +27,6 @@ exports.init = async () => {
 };
 
 exports.start = async () => {
-
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
     return server;

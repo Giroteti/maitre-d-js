@@ -1,13 +1,17 @@
-const Restaurant = require("../domain/restaurant")
-
-module.exports = function makeAReservation(
-    {
-        restaurant,
-        date,
-        numberOfGuests
+module.exports = class MakeAReservationCommandHandler{
+    constructor(repository) {
+        this.repository = repository
     }
-) {
-    let restaurantAggregate = new Restaurant(restaurant)
-    restaurantAggregate.makeAReservation(date, numberOfGuests)
-    return restaurantAggregate.getDomainEvents()
-};
+
+    handle (
+        {
+            restaurant,
+            date,
+            numberOfGuests
+        }
+    ) {
+        let restaurantAggregate = this.repository.getByName(restaurant)
+        restaurantAggregate.makeAReservation(date, numberOfGuests)
+        return restaurantAggregate.getDomainEvents()
+    }
+}
