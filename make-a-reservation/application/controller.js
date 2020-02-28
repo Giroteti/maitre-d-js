@@ -9,8 +9,8 @@ class MakeAReservationController {
     async makeAReservation(request, h) {
         let events = this.handler.handle(
             new MakeAReservationCommand(
-                "La boutique",
-                "2020-02-27",
+                request.payload["restaurant"],
+                request.payload["date"],
                 request.payload["number-of-guests"]
             )
         )

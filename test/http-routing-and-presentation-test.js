@@ -24,6 +24,8 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
+                    "restaurant":"La boutique",
+                    "date":"2020-02-28",
                     "number-of-guests":12
                 }
             });
@@ -34,7 +36,7 @@ describe('Make a reservation', function() {
                 JSON.parse(response.payload),
                 {
                     "restaurant": "La boutique",
-                    "date": "2020-02-27",
+                    "date": "2020-02-28",
                     "numberOfGuests": 12,
                     "tableNumber": 1
                 }
@@ -47,6 +49,8 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
+                    "restaurant":"La boutique",
+                    "date":"2020-02-28",
                     "number-of-guests":13
                 }
             });
@@ -57,7 +61,7 @@ describe('Make a reservation', function() {
                 JSON.parse(response.payload),
                 {
                     "restaurant": "La boutique",
-                    "date": "2020-02-27",
+                    "date": "2020-02-28",
                     "numberOfGuests": 13
                 }
             )
@@ -77,11 +81,11 @@ class DependenciesInjectionForTest extends DependenciesInjection {
             ) {
                 if (numberOfGuests <= 12) {
                     return [new ReservationAcceptedEvent(
-                        "La boutique", "2020-02-27", numberOfGuests
+                        restaurant, date, numberOfGuests
                     )]
                 } else {
                     return [new ReservationRejectedEvent(
-                        "La boutique", "2020-02-27", numberOfGuests
+                        restaurant, date, numberOfGuests
                     )]
                 }
             }
