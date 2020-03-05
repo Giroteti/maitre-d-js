@@ -16,6 +16,17 @@ services:
     command: "npm run start"
     env_file: '.env'
 
+  eventstore:
+    container_name: eventstore
+    image: eventstore/eventstore
+    ports:
+      - "2113:2113"
+      - "1113:1113"
+    environment:
+      - EVENTSTORE_MEM_DB=True
+    networks:
+      - nw
+
 networks:
   nw:
     driver: bridge
