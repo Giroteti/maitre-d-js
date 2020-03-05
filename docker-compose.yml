@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - nw
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: "npm run start"
+    env_file: '.env'
+
+networks:
+  nw:
+    driver: bridge
