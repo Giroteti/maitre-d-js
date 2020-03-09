@@ -18,6 +18,18 @@ class Restaurant {
         return restaurant
     }
 
+    static fromEvents(events) {
+        let id = null
+        let name = null
+        events.forEach( event => {
+            if (event instanceof RestaurantAdded) {
+                id = event.restaurantId
+                name = event.restaurantName
+            }
+        })
+        return new Restaurant(id, name)
+    }
+
     makeAReservation(date, numberOfGuests) {
         if (numberOfGuests <= Restaurant.#MAX_NUMBER_OF_GUESTS) {
             this.#events.push(

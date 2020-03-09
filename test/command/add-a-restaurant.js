@@ -5,7 +5,7 @@ const Restaurant = require("../../reservation/domain/restaurant");
 const AddARestaurantCommandHandler = require("../../reservation/command/add-a-restaurant/add-a-restaurant-command-handler");
 const DependenciesInjection = require("../../reservation/infrastructure/dependencies-injection");
 
-describe('Add a reservation', function () {
+describe('Add a restaurant', function () {
     describe('Command handler', function () {
         it('Should add a restaurant', async () => {
             // given

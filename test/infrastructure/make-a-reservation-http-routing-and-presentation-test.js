@@ -3,7 +3,7 @@ const { init, registerRoutes } = require('../../server');
 const DependenciesInjection = require("../../reservation/infrastructure/dependencies-injection")
 const ReservationAcceptedEvent = require("../../reservation/domain/events/reservation-accepted")
 const ReservationRejectedEvent = require("../../reservation/domain/events/reservation-rejected")
-const RestaurantNotFoundException = require("../../reservation/infrastructure/restaurant-repository").RestaurantNotFoundException;
+const RestaurantNotFoundException = require("../../reservation/infrastructure/event-store-restaurant-repository").RestaurantNotFoundException;
 
 describe('Make a reservation', function() {
     describe('routing', function() {

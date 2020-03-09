@@ -19,7 +19,7 @@ class MakeAReservationController {
     async makeAReservation(request, h) {
         try {
             this.validate(request)
-            let events = this.handler.handle(
+            let events = await this.handler.handle(
                 new MakeAReservationCommand(
                     request.payload["restaurant-id"],
                     request.payload["date"],

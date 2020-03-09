@@ -1,5 +1,5 @@
 const ReservationAcceptedEvent = require("../../domain/events/reservation-accepted")
-const RestaurantRepository = require("../../infrastructure/restaurant-repository")
+const RestaurantNotFoundException = require("../../infrastructure/event-store-restaurant-repository").RestaurantNotFoundException
 const {ValidationError} = require("@hapi/joi/lib/errors");
 
 
@@ -12,7 +12,7 @@ class MakeAReservationPresenter {
         }
     }
     presentException(exception, h) {
-        if (exception instanceof RestaurantRepository.RestaurantNotFoundException) {
+        if (exception instanceof RestaurantNotFoundException) {
             return h.response({message:exception.message}).code(404)
         } else if (exception instanceof ValidationError) {
             return h.response({message:exception.message}).code(400)

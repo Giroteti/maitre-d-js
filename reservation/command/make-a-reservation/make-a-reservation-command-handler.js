@@ -3,18 +3,18 @@ module.exports = class MakeAReservationCommandHandler{
         this.repository = repository
     }
 
-    handle (
+    async handle (
         {
             restaurantId,
             date,
             numberOfGuests
         }
     ) {
-        let restaurantAggregate = this.repository.getById(restaurantId)
-        restaurantAggregate.makeAReservation(date, numberOfGuests)
-        let events = restaurantAggregate.getDomainEvents()
-        this.repository.save(events)
-        restaurantAggregate.flushDomainEvents()
+        let restaurant = await this.repository.getById(restaurantId)
+        restaurant.makeAReservation(date, numberOfGuests)
+        let events = restaurant.getDomainEvents()
+        this.repository.store(restaurant)
+        restaurant.flushDomainEvents()
         return events
     }
 }

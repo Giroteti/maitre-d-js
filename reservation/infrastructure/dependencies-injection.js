@@ -1,6 +1,5 @@
 const MakeAReservationController = require('../application/make-a-reservation/make-a-reservation-controller');
 const MakeAReservationCommandHandler = require("../command/make-a-reservation/make-a-reservation-command-handler")
-const RestaurantRepository = require("../infrastructure/restaurant-repository").RestaurantRepository
 const MakeAReservationPresenter = require("../application/make-a-reservation/make-a-reservation-presenter")
 const AddARestaurantController = require('../application/add-a-restaurant/add-a-restaurant-controller')
 const EventStoreRestaurantRepository = require("../infrastructure/event-store-restaurant-repository").RestaurantRepository
@@ -9,13 +8,10 @@ const UUIDGenerator = require("./uuid-generator");
 const AddARestaurantPresenter = require("../application/add-a-restaurant/add-a-restaurant-presenter")
 
 class DependenciesInjection {
-    provideRestaurantRepository() {
-        return new RestaurantRepository()
-    }
 
     provideCommandHandler() {
         return new MakeAReservationCommandHandler(
-            this.provideRestaurantRepository()
+            this.provideEventStoreRepository()
         )
     }
 
