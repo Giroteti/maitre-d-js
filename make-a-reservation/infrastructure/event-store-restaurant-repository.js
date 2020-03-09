@@ -6,7 +6,7 @@ class EventStoreRestaurantRepository {
         let data = restaurant.getDomainEvents().map(event =>
             this.toEventDTO(event.constructor.name, uuid.v4(), event)
         )
-        this.persist(restaurant.id, data)
+        return this.persist(restaurant.id, data)
     }
 
     toEventDTO(eventType, eventId, data) {
@@ -17,7 +17,7 @@ class EventStoreRestaurantRepository {
         }
     }
 
-    persist(streamId, data) {
+    async persist(streamId, data) {
         let config = {
             method: "post",
             url: "http://eventstore:2113/streams/" + streamId,
@@ -34,14 +34,16 @@ class EventStoreRestaurantRepository {
             config
         ).then(function (response) {
             if (response.status !== 201) {
-                throw RestaurantEventsPersistenceFailure(streamId, eventDTOs)
+                Promise.reject(new RestaurantEventsPersistenceFailure(streamId, data))
+            } else {
+                Promise.resolve()
             }
         });
     }
 }
 
 function RestaurantEventsPersistenceFailure(name, events) {
-    this.message = `Restaurant "${name}"'s events "${events}" could not be persisted`;
+    this.message = `Restaurant "${name}"'s events "${JSON.stringify(events)}" could not be persisted`;
 
     if ("captureStackTrace" in Error)
         Error.captureStackTrace(this, RestaurantEventsPersistenceFailure);
