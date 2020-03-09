@@ -4,6 +4,7 @@ const RestaurantRepository = require("../infrastructure/restaurant-repository").
 const MakeAReservationPresenter = require("../application/presenter")
 const AddARestaurantController = require('../application/add-a-restaurant-controller')
 const EventStoreRestaurantRepository = require("../infrastructure/event-store-restaurant-repository")
+const AddARestaurantCommandHandler = require("../command/add-a-restaurant-command-handler")
 
 class DependenciesInjection {
     provideRestaurantRepository() {
@@ -27,11 +28,18 @@ class DependenciesInjection {
         )
     }
 
-    provideEventStoreRepository(){
+    provideEventStoreRepository() {
         return new EventStoreRestaurantRepository()
     }
+
     provideAddARestaurantController() {
         return new AddARestaurantController(
+            this.provideAddARestaurantCommandHandler()
+        )
+    }
+
+    provideAddARestaurantCommandHandler() {
+        return new AddARestaurantCommandHandler(
             this.provideEventStoreRepository()
         )
     }

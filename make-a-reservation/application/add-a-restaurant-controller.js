@@ -1,8 +1,9 @@
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
+const AddARestaurantCommand = require("../command/add-a-restaurant-command")
 
 class AddARestaurantController {
-    constructor(repository) {
-        this.repository = repository
+    constructor(handler) {
+        this.handler = handler
         this.addARestaurant = this.addARestaurant.bind(this)
     }
 
@@ -15,11 +16,13 @@ class AddARestaurantController {
     async addARestaurant(request, h) {
         try {
             this.validate(request)
-            let restaurant = await this.repository.new(request.payload["restaurant-name"]);
-            console.log(restaurant)
-            return {"restaurant-id": restaurant.id}
+            let events = await this.handler.handle(
+                new AddARestaurantCommand(
+                    request.payload["restaurant-name"]
+                )
+            )
+            return events[0]
         } catch (e) {
-            console.log(e)
             let response = {"message":"KO"}
             return response
         }
