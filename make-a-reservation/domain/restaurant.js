@@ -4,7 +4,8 @@ const ReservationRejectedEvent = require("./reservation-rejected");
 class Restaurant {
     static #MAX_NUMBER_OF_GUESTS = 12;
     #events = [];
-    constructor(name) {
+    constructor(id, name) {
+        this.id = id
         this.name = name
     }
 

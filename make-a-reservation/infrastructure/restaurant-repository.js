@@ -2,7 +2,7 @@ const Restaurant = require("../domain/restaurant")
 
 class RestaurantRepository {
     #restaurants = {
-        "La boutique" : new Restaurant("La boutique")
+        "La boutique" : new Restaurant("id", "La boutique")
     }
 
     getByName(name)
