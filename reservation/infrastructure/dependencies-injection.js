@@ -9,20 +9,20 @@ const AddARestaurantPresenter = require("../application/add-a-restaurant/add-a-r
 
 class DependenciesInjection {
 
-    provideCommandHandler() {
+    provideMakeAReservationCommandHandler() {
         return new MakeAReservationCommandHandler(
             this.provideEventStoreRepository()
         )
     }
 
-    providePresenter() {
+    provideMakeAReservationPresenter() {
         return new MakeAReservationPresenter()
     }
 
     provideMakeAReservationController() {
         return new MakeAReservationController(
-            this.provideCommandHandler(),
-            this.providePresenter()
+            this.provideMakeAReservationCommandHandler(),
+            this.provideMakeAReservationPresenter()
         )
     }
 

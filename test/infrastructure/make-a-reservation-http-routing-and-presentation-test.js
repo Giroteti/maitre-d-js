@@ -141,7 +141,7 @@ describe('Make a reservation', function() {
 });
 
 class DependenciesInjectionForTest extends DependenciesInjection {
-    provideCommandHandler() {
+    provideMakeAReservationCommandHandler() {
         let handler = {
             handle (
                 {

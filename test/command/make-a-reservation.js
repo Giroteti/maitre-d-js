@@ -7,7 +7,7 @@ describe('Make a reservation', function () {
     describe('Command handler', function () {
         it('Should return aggreggate generated events', async () => {
             // Given
-            let handler = new DependenciesInjectionForTest().provideCommandHandler()
+            let handler = new DependenciesInjectionForTest().provideMakeAReservationCommandHandler()
             let command = new MakeAReservationCommand(
                 "LaBoutiqueId",
                 "2020-28-02",
