@@ -31,10 +31,8 @@ describe('Add a reservation', function () {
 class DependenciesInjectionForTest extends DependenciesInjection {
     provideEventStoreRepository() {
         return {
-            async new({restaurantId, restaurantName}) {
-                return Promise.resolve(
-                    new Restaurant(restaurantId, restaurantName)
-                )
+            async store(restaurant) {
+                return Promise.resolve()
             }
         }
     }

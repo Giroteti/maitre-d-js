@@ -12,7 +12,8 @@ module.exports = class AddARestaurantCommandHandler {
     ) {
         let restaurant = Restaurant.new(this.idGenerator.next(), restaurantName);
         let events = restaurant.getDomainEvents();
-        await this.repository.new(events[0]);
+        await this.repository.store(restaurant);
+        restaurant.flushDomainEvents()
         return events
     }
 }
