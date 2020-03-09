@@ -1,4 +1,4 @@
-const Restaurant = require("../domain/restaurant")
+const Restaurant = require("../../domain/restaurant")
 module.exports = class AddARestaurantCommandHandler {
     constructor(repository, idGenerator) {
         this.repository = repository

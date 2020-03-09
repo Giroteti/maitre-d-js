@@ -1,6 +1,6 @@
-const ReservationAcceptedEvent = require("./reservation-accepted");
-const ReservationRejectedEvent = require("./reservation-rejected");
-const RestaurantAdded = require("./restaurant-added")
+const ReservationAcceptedEvent = require("./events/reservation-accepted");
+const ReservationRejectedEvent = require("./events/reservation-rejected");
+const RestaurantAdded = require("./events/restaurant-added")
 
 class Restaurant {
     static #MAX_NUMBER_OF_GUESTS = 12;

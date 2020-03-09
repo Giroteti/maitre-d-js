@@ -1,8 +1,8 @@
 var assert = require('assert');
-const DependenciesInjection = require("../../make-a-reservation/infrastructure/dependencies-injection")
-const MakeAReservationCommand = require("../../make-a-reservation/command/make-a-reservation-command")
-const ReservationAcceptedEvent = require("../../make-a-reservation/domain/reservation-accepted")
-const ReservationRejectedEvent = require("../../make-a-reservation/domain/reservation-rejected")
+const DependenciesInjection = require("../../reservation/infrastructure/dependencies-injection")
+const MakeAReservationCommand = require("../../reservation/command/make-a-reservation/make-a-reservation-command")
+const ReservationAcceptedEvent = require("../../reservation/domain/events/reservation-accepted")
+const ReservationRejectedEvent = require("../../reservation/domain/events/reservation-rejected")
 
 describe('Make a reservation', function () {
     describe('Command handler', function () {

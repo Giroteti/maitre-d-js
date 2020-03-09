@@ -1,9 +1,9 @@
 var assert = require('assert');
-const AddARestaurantCommand = require("../../make-a-reservation/command/add-a-restaurant-command");
-const RestaurantAddedEvent = require("../../make-a-reservation/domain/restaurant-added");
-const Restaurant = require("../../make-a-reservation/domain/restaurant");
-const AddARestaurantCommandHandler = require("../../make-a-reservation/command/add-a-restaurant-command-handler");
-const DependenciesInjection = require("../../make-a-reservation/infrastructure/dependencies-injection");
+const AddARestaurantCommand = require("../../reservation/command/add-a-restaurant/add-a-restaurant-command");
+const RestaurantAddedEvent = require("../../reservation/domain/events/restaurant-added");
+const Restaurant = require("../../reservation/domain/restaurant");
+const AddARestaurantCommandHandler = require("../../reservation/command/add-a-restaurant/add-a-restaurant-command-handler");
+const DependenciesInjection = require("../../reservation/infrastructure/dependencies-injection");
 
 describe('Add a reservation', function () {
     describe('Command handler', function () {

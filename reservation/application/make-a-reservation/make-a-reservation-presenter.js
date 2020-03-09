@@ -1,5 +1,5 @@
-const ReservationAcceptedEvent = require("../domain/reservation-accepted")
-const RestaurantRepository = require("../infrastructure/restaurant-repository")
+const ReservationAcceptedEvent = require("../../domain/events/reservation-accepted")
+const RestaurantRepository = require("../../infrastructure/restaurant-repository")
 const {ValidationError} = require("@hapi/joi/lib/errors");
 
 

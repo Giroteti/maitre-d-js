@@ -1,4 +1,4 @@
-const MakeAReservationCommand = require("../command/make-a-reservation-command")
+const MakeAReservationCommand = require("../../command/make-a-reservation/make-a-reservation-command")
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
 
 class MakeAReservationController {

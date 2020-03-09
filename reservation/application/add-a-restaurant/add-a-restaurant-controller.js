@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
-const AddARestaurantCommand = require("../command/add-a-restaurant-command");
+const AddARestaurantCommand = require("../../command/add-a-restaurant/add-a-restaurant-command");
 
 class AddARestaurantController {
     constructor(handler, presenter) {

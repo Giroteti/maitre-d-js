@@ -1,5 +1,5 @@
-const RestaurantEventsPersistenceFailure = require("../infrastructure/event-store-restaurant-repository").RestaurantEventsPersistenceFailure
-const RestaurantAdded = require("../domain/restaurant-added")
+const RestaurantEventsPersistenceFailure = require("../../infrastructure/event-store-restaurant-repository").RestaurantEventsPersistenceFailure
+const RestaurantAdded = require("../../domain/events/restaurant-added")
 const {ValidationError} = require("@hapi/joi/lib/errors");
 
 

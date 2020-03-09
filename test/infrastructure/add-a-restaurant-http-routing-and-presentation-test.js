@@ -1,8 +1,8 @@
 var assert = require('assert');
-const { init, registerRoutes } = require('../server');
-const DependenciesInjection = require("../make-a-reservation/infrastructure/dependencies-injection")
-const RestaurantAddedEvent = require("../make-a-reservation/domain/restaurant-added")
-const RestaurantEventsPersistenceFailure = require("../make-a-reservation/infrastructure/event-store-restaurant-repository").RestaurantEventsPersistenceFailure
+const { init, registerRoutes } = require('../../server');
+const DependenciesInjection = require("../../reservation/infrastructure/dependencies-injection")
+const RestaurantAddedEvent = require("../../reservation/domain/events/restaurant-added")
+const RestaurantEventsPersistenceFailure = require("../../reservation/infrastructure/event-store-restaurant-repository").RestaurantEventsPersistenceFailure
 describe('Add a restaurant', function() {
     describe('routing', function() {
 

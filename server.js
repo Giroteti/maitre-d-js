@@ -1,5 +1,5 @@
 'use strict';
-const DependenciesInjection = require("./make-a-reservation/infrastructure/dependencies-injection")
+const DependenciesInjection = require("./reservation/infrastructure/dependencies-injection")
 const Hapi = require('@hapi/hapi');
 const routes = require('./routes')
 

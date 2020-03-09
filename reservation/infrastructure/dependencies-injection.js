@@ -1,12 +1,12 @@
-const MakeAReservationController = require('../application/controller');
-const MakeAReservationCommandHandler = require("../command/make-a-reservation-command-handler")
+const MakeAReservationController = require('../application/make-a-reservation/make-a-reservation-controller');
+const MakeAReservationCommandHandler = require("../command/make-a-reservation/make-a-reservation-command-handler")
 const RestaurantRepository = require("../infrastructure/restaurant-repository").RestaurantRepository
-const MakeAReservationPresenter = require("../application/presenter")
-const AddARestaurantController = require('../application/add-a-restaurant-controller')
+const MakeAReservationPresenter = require("../application/make-a-reservation/make-a-reservation-presenter")
+const AddARestaurantController = require('../application/add-a-restaurant/add-a-restaurant-controller')
 const EventStoreRestaurantRepository = require("../infrastructure/event-store-restaurant-repository").RestaurantRepository
-const AddARestaurantCommandHandler = require("../command/add-a-restaurant-command-handler")
+const AddARestaurantCommandHandler = require("../command/add-a-restaurant/add-a-restaurant-command-handler")
 const UUIDGenerator = require("./uuid-generator");
-const AddARestaurantPresenter = require("../application/add-a-restaurant-presenter")
+const AddARestaurantPresenter = require("../application/add-a-restaurant/add-a-restaurant-presenter")
 
 class DependenciesInjection {
     provideRestaurantRepository() {
