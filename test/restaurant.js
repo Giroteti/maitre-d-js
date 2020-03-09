@@ -85,5 +85,39 @@ describe('Restaurant', function () {
                 ]
             )
         });
+
+        it('Should reject reservation for 4 if table for 9 is already booked', async () => {
+            // given
+            let events = [
+                new RestaurantAddedEvent(
+                    "uuid",
+                    "La boutique"
+                ),
+                new ReservationAcceptedEvent(
+                    "uuid",
+                    "La boutique",
+                    "2020-03-09",
+                    9
+                )
+            ]
+
+            // when
+            let restaurant = Restaurant.fromEvents(events)
+            restaurant.makeAReservation("2020-03-09", 4)
+            let domainEvents = restaurant.getDomainEvents()
+
+            // then
+            assert.deepEqual(
+                domainEvents,
+                [
+                    new ReservationRejectedEvent(
+                        "uuid",
+                        "La boutique",
+                        "2020-03-09",
+                        4
+                    )
+                ]
+            )
+        });
     });
 });
