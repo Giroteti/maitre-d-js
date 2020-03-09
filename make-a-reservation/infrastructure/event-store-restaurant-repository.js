@@ -53,5 +53,7 @@ function RestaurantEventsPersistenceFailure(name, events) {
 
 RestaurantEventsPersistenceFailure.prototype = Object.create(Error.prototype);
 
-
-module.exports = EventStoreRestaurantRepository
+module.exports = {
+    RestaurantRepository: EventStoreRestaurantRepository,
+    RestaurantEventsPersistenceFailure : RestaurantEventsPersistenceFailure
+}

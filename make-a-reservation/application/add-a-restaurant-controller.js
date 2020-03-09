@@ -1,9 +1,10 @@
 const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
-const AddARestaurantCommand = require("../command/add-a-restaurant-command")
+const AddARestaurantCommand = require("../command/add-a-restaurant-command");
 
 class AddARestaurantController {
-    constructor(handler) {
+    constructor(handler, presenter) {
         this.handler = handler
+        this.presenter = presenter
         this.addARestaurant = this.addARestaurant.bind(this)
     }
 
@@ -21,10 +22,10 @@ class AddARestaurantController {
                     request.payload["restaurant-name"]
                 )
             )
+            this.presenter.present(events, h);
             return events[0]
         } catch (e) {
-            let response = {"message":"KO"}
-            return response
+            return this.presenter.presentException(e, h);
         }
     }
 

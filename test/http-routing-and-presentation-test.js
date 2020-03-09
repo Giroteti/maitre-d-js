@@ -11,8 +11,9 @@ describe('Make a reservation', function() {
         let server;
 
         beforeEach(async () => {
-            await registerRoutes(new DependenciesInjectionForTest())
-            server = await init()
+            server = await registerRoutes(new DependenciesInjectionForTest()).then(
+                init
+            )
         });
 
         afterEach(async () => {
