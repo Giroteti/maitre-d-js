@@ -3,8 +3,7 @@ const uuid = require('uuid');
 const Restaurant = require("../domain/restaurant");
 
 class EventStoreRestaurantRepository {
-    new(restautantName) {
-        let restaurantId = uuid.v4();
+    new({restaurantId, restautantName}) {
         let eventId = uuid.v4();
         return axios(
             {

@@ -1,7 +1,8 @@
-const RestaurantAddedEvent = require("../domain/restaurant-added")
+const Restaurant = require("../domain/restaurant")
 module.exports = class AddARestaurantCommandHandler {
-    constructor(repository) {
+    constructor(repository, idGenerator) {
         this.repository = repository
+        this.idGenerator = idGenerator
     }
 
     async handle(
@@ -9,9 +10,9 @@ module.exports = class AddARestaurantCommandHandler {
             restaurantName
         }
     ) {
-        let restaurant = await this.repository.new(restaurantName);
-        return [
-            new RestaurantAddedEvent(restaurant.id, restaurant.name)
-        ]
+        let restaurant = Restaurant.new(this.idGenerator.next(), restaurantName);
+        let events = restaurant.getDomainEvents();
+        await this.repository.new(events[0]);
+        return events
     }
 }

@@ -1,5 +1,6 @@
 const ReservationAcceptedEvent = require("./reservation-accepted");
 const ReservationRejectedEvent = require("./reservation-rejected");
+const RestaurantAdded = require("./restaurant-added")
 
 class Restaurant {
     static #MAX_NUMBER_OF_GUESTS = 12;
@@ -7,6 +8,14 @@ class Restaurant {
     constructor(id, name) {
         this.id = id
         this.name = name
+    }
+
+    static new(id, name) {
+        let restaurant = new Restaurant(id, name)
+        restaurant.#events.push(
+            new RestaurantAdded(id, name)
+        )
+        return restaurant
     }
 
     makeAReservation(date, numberOfGuests) {

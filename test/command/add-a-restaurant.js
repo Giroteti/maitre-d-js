@@ -31,17 +31,26 @@ describe('Add a reservation', function () {
 class DependenciesInjectionForTest extends DependenciesInjection {
     provideEventStoreRepository() {
         return {
-            async new(restaurantName) {
+            async new({restaurantId, restaurantName}) {
                 return Promise.resolve(
-                    new Restaurant("uuid", restaurantName)
+                    new Restaurant(restaurantId, restaurantName)
                 )
+            }
+        }
+    }
+
+    provideUUIDGenerator() {
+        return {
+            next() {
+                return "uuid"
             }
         }
     }
 
     provideAddARestaurantCommandHandler() {
         return new AddARestaurantCommandHandler(
-            this.provideEventStoreRepository()
+            this.provideEventStoreRepository(),
+            this.provideUUIDGenerator()
         )
     }
 }
