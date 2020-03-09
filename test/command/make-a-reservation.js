@@ -10,7 +10,7 @@ describe('Make a reservation', function () {
             // Given
             let handler = new DependenciesInjection().provideCommandHandler()
             let command = new MakeAReservationCommand(
-                "La boutique",
+                "LaBoutiqueId",
                 "2020-28-02",
                 12
             )
@@ -21,7 +21,7 @@ describe('Make a reservation', function () {
             // Then
             assert.deepEqual(
                 events[0],
-                new ReservationAcceptedEvent("La boutique", "2020-28-02", 12)
+                new ReservationAcceptedEvent("LaBoutiqueId", "La boutique", "2020-28-02", 12)
             )
         })
 
@@ -29,7 +29,7 @@ describe('Make a reservation', function () {
             // Given
             let handler = new DependenciesInjection().provideCommandHandler()
             let command = new MakeAReservationCommand(
-                "La boutique",
+                "LaBoutiqueId",
                 "2020-28-02",
                 13
             )
@@ -40,7 +40,7 @@ describe('Make a reservation', function () {
             // Then
             assert.deepEqual(
                 events[0],
-                new ReservationRejectedEvent("La boutique", "2020-28-02", 13)
+                new ReservationRejectedEvent("LaBoutiqueId", "La boutique", "2020-28-02", 13)
             )
         })
     })

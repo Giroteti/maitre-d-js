@@ -10,7 +10,7 @@ class MakeAReservationController {
 
     static #schema = Joi.object(
         {
-            "restaurant": Joi.string().min(1).required(),
+            "restaurant-id": Joi.string().min(1).required(),
             "date": Joi.date().format("YYYY-MM-DD").raw().required(),
             "number-of-guests": Joi.number().min(1)
         }
@@ -21,7 +21,7 @@ class MakeAReservationController {
             this.validate(request)
             let events = this.handler.handle(
                 new MakeAReservationCommand(
-                    request.payload["restaurant"],
+                    request.payload["restaurant-id"],
                     request.payload["date"],
                     request.payload["number-of-guests"]
                 )

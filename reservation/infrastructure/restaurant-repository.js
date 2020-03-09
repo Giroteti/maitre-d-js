@@ -2,27 +2,26 @@ const Restaurant = require("../domain/restaurant")
 
 class RestaurantRepository {
     #restaurants = {
-        "La boutique" : new Restaurant("id", "La boutique")
+        "LaBoutiqueId" : new Restaurant("LaBoutiqueId", "La boutique")
     }
 
-    getByName(name)
+    getById(id)
     {
         // TODO get restaurant from persisted events
-        let restaurant = this.#restaurants[name]
+        let restaurant = this.#restaurants[id]
         if (restaurant == null) {
-            throw new RestaurantNotFoundException(name)
+            throw new RestaurantNotFoundException(id)
         }
         return restaurant
     }
-
     save(events)
     {
         // TODO persist events
     }
 }
 
-function RestaurantNotFoundException(name) {
-    this.message = `Restaurant "${name}" does not exist`;
+function RestaurantNotFoundException(id) {
+    this.message = `Restaurant "${id}" does not exist`;
 
     if ("captureStackTrace" in Error)
         Error.captureStackTrace(this, RestaurantNotFoundException);

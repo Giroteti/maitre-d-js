@@ -1,5 +1,6 @@
 class ReservationRejectedEvent {
-    constructor(restaurant, date, numberOfGuests) {
+    constructor(restaurantId, restaurant, date, numberOfGuests) {
+        this.restaurantId = restaurantId
         this.restaurant = restaurant
         this.date = date
         this.numberOfGuests = numberOfGuests

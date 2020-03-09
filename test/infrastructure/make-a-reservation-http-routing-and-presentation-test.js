@@ -26,7 +26,7 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
-                    "restaurant":"La boutique",
+                    "restaurant-id":"LaBoutiqueId",
                     "date":"2020-02-28",
                     "number-of-guests":12
                 }
@@ -37,6 +37,7 @@ describe('Make a reservation', function() {
             assert.deepEqual(
                 JSON.parse(response.payload),
                 {
+                    "restaurantId": "LaBoutiqueId",
                     "restaurant": "La boutique",
                     "date": "2020-02-28",
                     "numberOfGuests": 12,
@@ -51,7 +52,7 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
-                    "restaurant":"La boutique",
+                    "restaurant-id":"LaBoutiqueId",
                     "date":"2020-02-28",
                     "number-of-guests":13
                 }
@@ -62,6 +63,7 @@ describe('Make a reservation', function() {
             assert.deepEqual(
                 JSON.parse(response.payload),
                 {
+                    "restaurantId": "LaBoutiqueId",
                     "restaurant": "La boutique",
                     "date": "2020-02-28",
                     "numberOfGuests": 13
@@ -75,7 +77,7 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
-                    "restaurant":"500",
+                    "restaurant-id":"500",
                     "date":"2020-02-28",
                     "number-of-guests":13
                 }
@@ -99,7 +101,7 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
-                    "restaurant":"404",
+                    "restaurant-id":"404",
                     "date":"2020-02-28",
                     "number-of-guests":12
                 }
@@ -121,7 +123,7 @@ describe('Make a reservation', function() {
                 method: 'POST',
                 url: '/make-a-reservation',
                 payload: {
-                    "restaurant":"La boutique",
+                    "restaurant-id":"LaBoutiqueId",
                     "number-of-guests":12
                 }
             });
@@ -143,24 +145,24 @@ class DependenciesInjectionForTest extends DependenciesInjection {
         let handler = {
             handle (
                 {
-                    restaurant,
+                    restaurantId,
                     date,
                     numberOfGuests
                 }
             ) {
-                if (restaurant == "500") {
+                if (restaurantId == "500") {
                     throw new Error("whatever")
-                } else if (restaurant == "404") {
+                } else if (restaurantId == "404") {
                     throw new RestaurantNotFoundException("404")
                 }
 
                 if (numberOfGuests <= 12) {
                     return [new ReservationAcceptedEvent(
-                        restaurant, date, numberOfGuests
+                        "LaBoutiqueId", "La boutique", date, numberOfGuests
                     )]
                 } else {
                     return [new ReservationRejectedEvent(
-                        restaurant, date, numberOfGuests
+                        "LaBoutiqueId","La boutique", date, numberOfGuests
                     )]
                 }
             }

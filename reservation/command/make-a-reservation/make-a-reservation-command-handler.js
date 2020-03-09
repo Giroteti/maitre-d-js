@@ -5,12 +5,12 @@ module.exports = class MakeAReservationCommandHandler{
 
     handle (
         {
-            restaurant,
+            restaurantId,
             date,
             numberOfGuests
         }
     ) {
-        let restaurantAggregate = this.repository.getByName(restaurant)
+        let restaurantAggregate = this.repository.getById(restaurantId)
         restaurantAggregate.makeAReservation(date, numberOfGuests)
         let events = restaurantAggregate.getDomainEvents()
         this.repository.save(events)

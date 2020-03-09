@@ -1,10 +1,10 @@
 class MakeAReservationCommand {
     constructor(
-        restaurant,
+        restaurantId,
         date,
         numberOfGuests
     ) {
-        this.restaurant = restaurant
+        this.restaurantId = restaurantId
         this.date = date
         this.numberOfGuests = numberOfGuests
     }
