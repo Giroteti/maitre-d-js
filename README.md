@@ -108,6 +108,11 @@ L'implémentation proposée dans ce repository s'appuie sur l'Event Sourcing pou
 npm test
 ```
 
+## Lancer les tests de bout en bout 
+```
+npm run e2etest
+```
+
 ## Déployer l'application en local
 ```
 docker-compose up

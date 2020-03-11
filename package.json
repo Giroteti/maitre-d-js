@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive",
+    "e2etest": "docker-compose -f docker-compose-tests.yml run newman run /etc/newman/maitred.postman_collection.json",
     "start": "node index.js"
   },
   "author": "",

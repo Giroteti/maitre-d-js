@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "76ddec52-9913-444e-9ee5-fb9678b4f08e",
+		"name": "Maitre D'",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add a restaurant named \"La boutique\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77fe76cd-9d48-4906-828a-7d356c0c0a4c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"var restaurantId = jsonData[\"restaurantId\"];",
+							"",
+							"pm.test(\"Restaurant id is returned\", function () {",
+							"    pm.expect(restaurantId).not.equal(null)",
+							"});",
+							"",
+							"pm.globals.set(\"LaBoutiqueId\", restaurantId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"restaurant-name\":\"La boutique\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app:8080/add-a-restaurant",
+					"protocol": "http",
+					"host": [
+						"app"
+					],
+					"port": "8080",
+					"path": [
+						"add-a-restaurant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make a reservation for 4 (=> Accepted)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "35434281-e54d-42e9-82c7-cf8d48961695",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "43175932-5dfe-4063-96fa-c8edf80567ea",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"restaurant-id\":\"{{LaBoutiqueId}}\",\n\t\"date\":\"2020-03-09\",\n\t\"number-of-guests\":4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app:8080/make-a-reservation",
+					"protocol": "http",
+					"host": [
+						"app"
+					],
+					"port": "8080",
+					"path": [
+						"make-a-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make a reservation for 8 (=> Accepted)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a3f2d1b4-3234-4fc7-83b6-c418d5d2c634",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "417e7bcb-dd9c-439c-9e67-db37728aebf2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"restaurant-id\":\"{{LaBoutiqueId}}\",\n\t\"date\":\"2020-03-09\",\n\t\"number-of-guests\":8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app:8080/make-a-reservation",
+					"protocol": "http",
+					"host": [
+						"app"
+					],
+					"port": "8080",
+					"path": [
+						"make-a-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make a reservation for 1 (=> Rejected)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0efb059-83ef-4287-a1dd-8cac875cd0fe",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "43aa1374-2aed-40b0-9c14-f32c9c252eed",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"restaurant-id\":\"{{LaBoutiqueId}}\",\n\t\"date\":\"2020-03-09\",\n\t\"number-of-guests\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://app:8080/make-a-reservation",
+					"protocol": "http",
+					"host": [
+						"app"
+					],
+					"port": "8080",
+					"path": [
+						"make-a-reservation"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "cfcf7ad8-fb85-4c82-a838-970947771303",
+			"key": "restaurantId",
+			"value": "d97ac700-20c5-4f99-a72e-ea7d06f9df88",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
