@@ -3,6 +3,7 @@ const uuid = require('uuid');
 const Restaurant = require("../domain/restaurant")
 const RestaurantAddedEvent = require("../domain/events/restaurant-added")
 const ReservationAcceptedEvent = require("../domain/events/reservation-accepted")
+const ReservationRejectedEvent = require("../domain/events/reservation-rejected")
 
 class EventStoreRestaurantRepository {
 
@@ -48,6 +49,14 @@ class EventStoreRestaurantRepository {
                 } else if (event.eventType === "ReservationAcceptedEvent") {
                     let data = JSON.parse(event.data);
                     return new ReservationAcceptedEvent(
+                        data.restaurantId,
+                        data.restaurant,
+                        data.date,
+                        data.numberOfGuests
+                    )
+                } else if (event.eventType === "ReservationRejectedEvent") {
+                    let data = JSON.parse(event.data);
+                    return new ReservationRejectedEvent(
                         data.restaurantId,
                         data.restaurant,
                         data.date,
